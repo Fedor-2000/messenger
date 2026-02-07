@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Мессенджер</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resources/resources.qrc">
+    <normaloff>:/icons/messenger.png</normaloff>:/icons/messenger.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QSplitter" name="mainSplitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <!-- Left panel: Contacts/Users -->
+      <widget class="QWidget" name="leftPanel" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>0</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="leftPanelLayout">
+        <item>
+         <widget class="QLineEdit" name="searchContacts">
+          <property name="placeholderText">
+           <string>Поиск контактов...</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+    background-color: #f0f0f0;
+    border: 1px solid #d0d0d0;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 14px;
+}
+QLineEdit:focus {
+    border: 2px solid #0078d4;
+}</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTabWidget" name="contactsTabWidget">
+          <property name="tabPosition">
+           <enum>QTabWidget::North</enum>
+          </property>
+          <widget class="QWidget" name="chatsTab">
+           <attribute name="title">
+            <string>Чаты</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QListWidget" name="chatsList">
+              <property name="styleSheet">
+               <string notr="true">QListWidget {
+    background-color: transparent;
+    border: none;
+}
+QListWidget::item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+QListWidget::item:selected {
+    background-color: #e6f3ff;
+    border-radius: 5px;
+}</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="contactsTab">
+           <attribute name="title">
+            <string>Контакты</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QListWidget" name="contactsList">
+              <property name="styleSheet">
+               <string notr="true">QListWidget {
+    background-color: transparent;
+    border: none;
+}
+QListWidget::item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+QListWidget::item:selected {
+    background-color: #e6f3ff;
+    border-radius: 5px;
+}</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      
+      <!-- Right panel: Chat area -->
+      <widget class="QWidget" name="rightPanel" native="true">
+       <layout class="QVBoxLayout" name="rightPanelLayout">
+        <!-- Chat header -->
+        <widget class="QWidget" name="chatHeader" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>60</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QWidget#chatHeader {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 8px 8px 0 0;
+}</string>
+         </property>
+         <layout class="QHBoxLayout" name="headerLayout">
+          <item>
+           <widget class="QLabel" name="chatTitle">
+            <property name="text">
+             <string>Выберите чат</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLabel {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="headerSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="attachButton">
+            <property name="text">
+             <string>📎</string>
+            </property>
+            <property name="toolTip">
+             <string>Прикрепить файл</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+}
+QPushButton:hover {
+    background-color: #e0e0e0;
+    border-radius: 20px;
+}</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="emojiButton">
+            <property name="text">
+             <string>😊</string>
+            </property>
+            <property name="toolTip">
+             <string>Эмодзи</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+}
+QPushButton:hover {
+    background-color: #e0e0e0;
+    border-radius: 20px;
+}</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="moreButton">
+            <property name="text">
+             <string>⋮</string>
+            </property>
+            <property name="toolTip">
+             <string>Еще</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+}
+QPushButton:hover {
+    background-color: #e0e0e0;
+    border-radius: 20px;
+}</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        
+        <!-- Chat messages area -->
+        <widget class="QSplitter" name="chatSplitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         
+         <!-- Messages list -->
+         <widget class="QListView" name="chatView">
+          <property name="styleSheet">
+           <string notr="true">QListView {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 0;
+}
+QListView::item {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+QListView::item:selected {
+    background-color: #e6f3ff;
+}</string>
+          </property>
+         </widget>
+         
+         <!-- Message input area -->
+         <widget class="QWidget" name="inputArea" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>80</height>
+           </size>
+          </property>
+          <layout class="QHBoxLayout" name="inputLayout">
+           <item>
+            <widget class="QPushButton" name="stickerButton">
+             <property name="text">
+              <string>👻</string>
+             </property>
+             <property name="toolTip">
+              <string>Стикер</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+}
+QPushButton:hover {
+    background-color: #f0f0f0;
+    border-radius: 20px;
+}</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="messageInput">
+             <property name="placeholderText">
+              <string>Введите сообщение...</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit {
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 12px 20px;
+    font-size: 14px;
+}
+QLineEdit:focus {
+    border: 2px solid #0078d4;
+}</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="sendButton">
+             <property name="text">
+              <string>➤</string>
+             </property>
+             <property name="toolTip">
+              <string>Отправить</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton {
+    background-color: #0078d4;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #106ebe;
+}
+QPushButton:pressed {
+    background-color: #005a9e;
+}</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1200</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="actionSettings"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Правка</string>
+    </property>
+    <addaction name="actionCut"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>Вид</string>
+    </property>
+    <addaction name="actionDarkTheme"/>
+    <addaction name="actionLightTheme"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Справка</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuView"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSettings" name="actionSettings">
+   <property name="text">
+    <string>Настройки</string>
+   </property>
+  </action>
+  <action name="actionExit" name="actionExit">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="actionCut" name="actionCut">
+   <property name="text">
+    <string>Вырезать</string>
+   </property>
+  </action>
+  <action name="actionCopy" name="actionCopy">
+   <property name="text">
+    <string>Копировать</string>
+   </property>
+  </action>
+  <action name="actionPaste" name="actionPaste">
+   <property name="text">
+    <string>Вставить</string>
+   </property>
+  </action>
+  <action name="actionDarkTheme" name="actionDarkTheme">
+   <property name="text">
+    <string>Темная тема</string>
+   </property>
+  </action>
+  <action name="actionLightTheme" name="actionLightTheme">
+   <property name="text">
+    <string>Светлая тема</string>
+   </property>
+  </action>
+  <action name="actionAbout" name="actionAbout">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../resources/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,145 @@
+# API Gateway Configuration for Kong
+# File: kong/kong.yml
+
+_format_version: "2.1"
+
+services:
+  - name: auth-service
+    url: http://auth-service:8000
+    routes:
+      - name: auth-routes
+        paths:
+          - /auth
+          - /login
+          - /register
+          - /logout
+          - /2fa
+        strip_path: true
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 100
+          policy: redis
+          redis_host: redis
+          redis_port: 6379
+
+  - name: chat-service
+    url: http://chat-service:8001
+    routes:
+      - name: chat-routes
+        paths:
+          - /chats
+          - /messages
+          - /rooms
+        strip_path: true
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 1000
+          policy: redis
+          redis_host: redis
+          redis_port: 6379
+
+  - name: file-service
+    url: http://file-service:8002
+    routes:
+      - name: file-routes
+        paths:
+          - /files
+          - /uploads
+          - /downloads
+        strip_path: true
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 500
+          policy: redis
+          redis_host: redis
+          redis_port: 6379
+
+  - name: notification-service
+    url: http://notification-service:8003
+    routes:
+      - name: notification-routes
+        paths:
+          - /notifications
+          - /push
+        strip_path: true
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 200
+          policy: redis
+          redis_host: redis
+          redis_port: 6379
+
+  - name: user-service
+    url: http://user-service:8004
+    routes:
+      - name: user-routes
+        paths:
+          - /users
+          - /profiles
+        strip_path: true
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 300
+          policy: redis
+          redis_host: redis
+          redis_port: 6379
+
+upstreams:
+  - name: auth-service
+    targets:
+      - target: auth-service:8000
+        weight: 100
+  - name: chat-service
+    targets:
+      - target: chat-service:8001
+        weight: 100
+  - name: file-service
+    targets:
+      - target: file-service:8002
+        weight: 100
+  - name: notification-service
+    targets:
+      - target: notification-service:8003
+        weight: 100
+  - name: user-service
+    targets:
+      - target: user-service:8004
+        weight: 100
+
+plugins:
+  - name: cors
+    config:
+      origins:
+        - "http://localhost:3000"
+        - "https://messenger.example.com"
+      methods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - PATCH
+      headers:
+        - Content-Type
+        - Authorization
+        - X-Requested-With
+      exposed_headers:
+        - Content-Length
+        - Content-Type
+      credentials: true
+      max_age: 3600
+  - name: jwt
+    config:
+      uri_param_names:
+        - jwt
+      claims_to_verify:
+        - exp
+        - nbf
+      key_claim_name: kid
+  - name: acl
+    config:
+      hide_groups_header: true

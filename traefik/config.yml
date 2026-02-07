@@ -1,0 +1,31 @@
+# traefik/config.yml
+http:
+  middlewares:
+    security-headers:
+      headers:
+        frameDeny: true
+        sslRedirect: true
+        browserXssFilter: true
+        contentTypeNosniff: true
+        forceSTSHeader: true
+        stsIncludeSubdomains: true
+        stsPreload: true
+        stsSeconds: 15552000
+
+  routers:
+    messenger-router:
+      rule: "Host(`localhost`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: myresolver
+      service: messenger-service
+
+  services:
+    messenger-service:
+      loadBalancer:
+        servers:
+          - url: http://messenger-server:8080
+        passHostHeader: true

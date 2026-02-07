@@ -1,0 +1,35 @@
+# server/Dockerfile.quality
+FROM python:3.11-slim
+
+WORKDIR /workspace
+
+# Устанавливаем системные зависимости
+RUN apt-get update && apt-get install -y \
+    gcc \
+    build-essential \
+    git \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Устанавливаем Python зависимости для анализа кода
+COPY requirements-quality.txt /tmp/requirements-quality.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-quality.txt
+
+# Устанавливаем Node.js для SonarScanner (если нужно)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Устанавливаем SonarScanner (опционально)
+RUN npm install -g sonar-scanner
+
+# Копируем скрипты анализа
+COPY scripts/analysis/ /workspace/scripts/analysis/
+
+WORKDIR /workspace
+
+# Устанавливаем пользователя для безопасности
+RUN useradd -m -u 1000 analyst && chown -R analyst:analyst /workspace
+USER analyst
+
+CMD ["/bin/bash"]

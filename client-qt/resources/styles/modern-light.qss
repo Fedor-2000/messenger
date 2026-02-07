@@ -1,0 +1,365 @@
+/* Modern Light Theme for Messenger Client */
+/* client-qt/resources/styles/modern-light.qss */
+
+/* Main window */
+QMainWindow {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Central widget */
+QWidget {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: "Segoe UI", "Roboto", "Ubuntu", sans-serif;
+}
+
+/* Chat area */
+QListView {
+    background-color: #f3f3f3;
+    alternate-background-color: #fafafa;
+    color: #000000;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    selection-background-color: #0078d4;
+    selection-color: #ffffff;
+}
+
+/* Message input area */
+QLineEdit {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+QLineEdit:focus {
+    border: 2px solid #0078d4;
+    box-shadow: 0 1px 5px rgba(0,120,212,0.3);
+}
+
+/* Buttons */
+QPushButton {
+    background-color: #0078d4;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+QPushButton:hover {
+    background-color: #106ebe;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+QPushButton:pressed {
+    background-color: #005a9e;
+    transform: translateY(1px);
+}
+
+QPushButton:disabled {
+    background-color: #cccccc;
+    color: #8a8a8a;
+}
+
+/* Send button */
+QPushButton#sendButton {
+    background-color: #23a9f2;
+    min-width: 80px;
+    min-height: 40px;
+}
+
+QPushButton#sendButton:hover {
+    background-color: #1070a0;
+}
+
+/* Connect button */
+QPushButton#connectButton {
+    background-color: #4caf50;
+}
+
+QPushButton#connectButton:hover {
+    background-color: #3d8b40;
+}
+
+/* Tab widget */
+QTabWidget::pane {
+    border: none;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+}
+
+QTabBar::tab {
+    background-color: #e0e0e0;
+    color: #424242;
+    padding: 10px 20px;
+    margin-right: 2px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-weight: 500;
+}
+
+QTabBar::tab:selected {
+    background-color: #ffffff;
+    color: #000000;
+    border-bottom: 3px solid #0078d4;
+}
+
+QTabBar::tab:hover:!selected {
+    background-color: #d0d0d0;
+}
+
+/* Scroll bar */
+QScrollBar:vertical {
+    background: #f0f0f0;
+    width: 12px;
+    border-radius: 6px;
+}
+
+QScrollBar::handle:vertical {
+    background: #c0c0c0;
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #a0a0a0;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+/* Combo box */
+QComboBox {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    min-width: 60px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 20px;
+    border-left: 1px solid #cccccc;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+QComboBox::down-arrow {
+    image: url(:/icons/down_arrow.png);
+}
+
+/* Check boxes and radio buttons */
+QCheckBox {
+    spacing: 8px;
+    color: #000000;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: 2px solid #cccccc;
+    background-color: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+QCheckBox::indicator:checked {
+    border: 2px solid #0078d4;
+    background-color: #0078d4;
+    border-radius: 3px;
+}
+
+QRadioButton {
+    spacing: 8px;
+    color: #000000;
+}
+
+QRadioButton::indicator {
+    width: 18px;
+    height: 18px;
+}
+
+QRadioButton::indicator:unchecked {
+    border: 2px solid #cccccc;
+    background-color: #ffffff;
+    border-radius: 9px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+QRadioButton::indicator:checked {
+    border: 2px solid #0078d4;
+    background-color: #0078d4;
+    border-radius: 9px;
+}
+
+/* Spin box */
+QSpinBox {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Group box */
+QGroupBox {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 1ex;
+    font-weight: bold;
+    color: #212121;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 0 3px;
+}
+
+/* Status bar */
+QStatusBar {
+    background-color: #f5f5f5;
+    color: #424242;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Menu bar */
+QMenuBar {
+    background-color: #f5f5f5;
+    color: #000000;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 4px 8px;
+}
+
+QMenuBar::item:selected {
+    background: #e0e0e0;
+}
+
+QMenuBar::item:pressed {
+    background: #0078d4;
+    color: #ffffff;
+}
+
+/* Tool bar */
+QToolBar {
+    background-color: #f5f5f5;
+    border: none;
+    spacing: 5px;
+    padding: 5px;
+}
+
+/* Message styling in chat */
+QListView::item {
+    padding: 8px;
+    border-radius: 8px;
+    margin: 4px 0;
+}
+
+/* Online status indicators */
+QLabel#statusIndicator {
+    border-radius: 8px;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+QLabel#statusOnline {
+    background-color: #4caf50;
+    color: #ffffff;
+}
+
+QLabel#statusAway {
+    background-color: #ff9800;
+    color: #ffffff;
+}
+
+QLabel#statusBusy {
+    background-color: #f44336;
+    color: #ffffff;
+}
+
+QLabel#statusOffline {
+    background-color: #757575;
+    color: #ffffff;
+}
+
+/* User list */
+QListWidget {
+    background-color: #f3f3f3;
+    color: #000000;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+QListWidget::item {
+    padding: 8px;
+    border-radius: 4px;
+    margin: 2px 0;
+}
+
+QListWidget::item:selected {
+    background-color: #0078d4;
+    color: #ffffff;
+}
+
+/* Splitter */
+QSplitter::handle {
+    background-color: #e0e0e0;
+    width: 1px;
+}
+
+/* Progress bar */
+QProgressBar {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    text-align: center;
+    color: #000000;
+    background-color: #f0f0f0;
+}
+
+QProgressBar::chunk {
+    background-color: #0078d4;
+    border-radius: 3px;
+}
+
+/* Tooltip */
+QToolTip {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Header */
+QHeaderView::section {
+    background-color: #f0f0f0;
+    color: #000000;
+    padding: 4px;
+    border: 1px solid #e0e0e0;
+    font-weight: bold;
+}

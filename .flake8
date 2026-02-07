@@ -1,0 +1,22 @@
+# .flake8
+[flake8]
+max-line-length = 88
+extend-ignore = 
+    # E203 and W503 are incompatible with Black
+    E203,
+    W503,
+exclude = 
+    .git,
+    __pycache__,
+    venv,
+    .venv,
+    build,
+    dist,
+    .tox,
+    .eggs,
+    migrations,
+    node_modules,
+max-complexity = 10
+per-file-ignores =
+    # Allow print statements in tests
+    tests/*:E999

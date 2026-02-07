@@ -1,0 +1,190 @@
+version: '3.8'
+
+services:
+  # Мессенджер сервер
+  messenger-server:
+    build: ./server
+    container_name: messenger-server
+    restart: unless-stopped
+    ports:
+      - "8888:8888"  # TCP для C++ клиентов
+      - "8080:8080"  # WebSocket/REST для web
+    environment:
+      - DATABASE_URL=postgresql://messenger:${POSTGRES_PASSWORD}@db:5432/messenger
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379
+      - JWT_SECRET=${JWT_SECRET}
+      - MESSAGE_ENCRYPTION_KEY=${MESSAGE_ENCRYPTION_KEY}
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./server/app/static:/app/app/static:ro
+      - server-logs:/app/logs
+      - uploads:/app/uploads
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; s = socket.socket(); s.connect(('localhost', 8888)); s.close()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Сервер для анализа качества кода
+  code-quality:
+    build: 
+      context: .
+      dockerfile: ./server/Dockerfile.quality
+    container_name: messenger-code-quality
+    restart: "no"
+    volumes:
+      - .:/workspace
+    environment:
+      - PYTHONPATH=/workspace/server
+    networks:
+      - app-network
+    profiles:
+      - development
+      - quality
+
+  # База данных PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: messenger-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=messenger
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=messenger
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/db-init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U messenger"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis для кэширования и pub/sub
+  redis:
+    image: redis:7-alpine
+    container_name: messenger-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx для балансировки нагрузки
+  nginx:
+    image: nginx:alpine
+    container_name: messenger-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - messenger-server
+    networks:
+      - app-network
+
+  # Админка для мониторинга (опционально)
+  adminer:
+    image: adminer
+    container_name: messenger-adminer
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
+
+  # Prometheus для мониторинга
+  prometheus:
+    image: prom/prometheus
+    container_name: messenger-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+    ports:
+      - "9090:9090"
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Grafana для визуализации
+  grafana:
+    image: grafana/grafana
+    container_name: messenger-grafana
+    restart: unless-stopped
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - prometheus
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # SonarQube для анализа качества кода (опционально)
+  sonarqube:
+    image: sonarqube:community
+    container_name: messenger-sonarqube
+    restart: unless-stopped
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+      - SONAR_LOADBALANCER_INSTANCE_SELECTION=false
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_extensions:/opt/sonarqube/extensions
+    networks:
+      - app-network
+    profiles:
+      - development
+      - quality
+
+volumes:
+  postgres_data:
+  redis_data:
+  server-logs:
+  uploads:
+  prometheus_data:
+  grafana_data:
+  sonarqube_data:
+  sonarqube_logs:
+  sonarqube_extensions:
+
+networks:
+  app-network:
+    driver: bridge

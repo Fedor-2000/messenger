@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
 
 # C extensions
@@ -20,11 +20,9 @@ parts/
 sdist/
 var/
 wheels/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -46,10 +44,9 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
-*.py.cover
+*.py,cover
 .hypothesis/
 .pytest_cache/
-cover/
 
 # Translations
 *.mo
@@ -68,11 +65,10 @@ instance/
 # Scrapy stuff:
 .scrapy
 
-# Sphinx documentation
+# Sphinx documentation docs
 docs/_build/
 
 # PyBuilder
-.pybuilder/
 target/
 
 # Jupyter Notebook
@@ -83,46 +79,14 @@ profile_default/
 ipython_config.py
 
 # pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
+.python-version
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
 #   However, in case of collaboration, if having platform-specific dependencies or dependencies
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
-#Pipfile.lock
-
-# UV
-#   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#uv.lock
-
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-#poetry.lock
-#poetry.toml
-
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#   pdm recommends including project-wide configuration in pdm.toml, but excluding .pdm-python.
-#   https://pdm-project.org/en/latest/usage/project/#working-with-version-control
-#pdm.lock
-#pdm.toml
-.pdm-python
-.pdm-build/
-
-# pixi
-#   Similar to Pipfile.lock, it is generally recommended to include pixi.lock in version control.
-#pixi.lock
-#   Pixi creates a virtual environment in the .pixi directory, just like venv module creates one
-#   in the .venv directory. It is recommended not to include this directory in version control.
-.pixi
+Pipfile.lock
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
@@ -136,7 +100,6 @@ celerybeat.pid
 
 # Environments
 .env
-.envrc
 .venv
 env/
 venv/
@@ -162,46 +125,412 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# pytype static type analyzer
-.pytype/
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# Cython debug symbols
-cython_debug/
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
 
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+# Docker
+.dockerenv
+.devcontainer/
 
-# Abstra
-# Abstra is an AI-powered process automation framework.
-# Ignore directories containing user credentials, local state, and settings.
-# Learn more at https://abstra.io/docs
-.abstra/
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Visual Studio Code
-#  Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
-#  that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#  and can be added to the global gitignore or merged into this file. However, if you prefer, 
-#  you could uncomment the following to ignore the entire vscode folder
-# .vscode/
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
 
-# Ruff stuff:
-.ruff_cache/
+# Coverage directory used by tools like istanbul
+coverage/
 
-# PyPI configuration file
-.pypirc
+# nyc test coverage
+.nyc_output
 
-# Cursor
-#  Cursor is an AI-powered code editor. `.cursorignore` specifies files/directories to
-#  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
-#  refer to https://docs.cursor.com/context/ignore-files
-.cursorignore
-.cursorindexingignore
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
 
-# Marimo
-marimo/_static/
-marimo/_lsp/
-__marimo__/
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# TypeScript v1 declaration files
+typings/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# parcel-bundler from JavaScript
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+out/
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Laravel / PHP Composer
+vendor/
+
+# Composer dependencies
+composer.lock
+
+# Laravel Elixir / Gulp
+public/build/
+
+# Ember CLI
+tmp/
+temp/
+
+# Rails / Ruby on Rails
+*.rbc
+capybara-*.html
+.rspec
+/public/system
+/public/uploads
+/storage/*
+!/storage/.gitkeep
+/log/*
+!/log/.gitkeep
+/tmp/*
+!/tmp/.gitkeep
+/vendor/bundle/
+.bundle/
+.rbx/
+
+# Miniprofiler
+mini_profiler_results/
+
+# Bundle install
+vendor/bundle
+
+# Compiling assets
+public/assets
+public/system
+public/uploads
+
+# Environment variables
+.env
+.env.local
+.env.staging
+.env.production
+
+# Qt/C++ client
+client-qt/build/
+client-qt/CMakeFiles/
+client-qt/CMakeCache.txt
+client-qt/Makefile
+client-qt/core
+client-qt/client-qt
+client-qt/*.user
+client-qt/ui_*.h
+
+# Mobile client (Flutter)
+mobile_client/build/
+mobile_client/ios/
+mobile_client/android/
+mobile_client/pubspec.lock
+mobile_client/.dart_tool/
+mobile_client/.flutter-plugins
+mobile_client/.flutter-plugins-dependencies
+mobile_client/.metadata
+mobile_client/coverage/
+mobile_client/lib/generated_plugin_registrant.dart
+
+# Server
+server/__pycache__/
+server/*.pyc
+server/*.pyo
+server/*.pyd
+server/.pytest_cache/
+server/.coverage
+server/htmlcov/
+server/.mypy_cache/
+server/.venv/
+server/venv/
+server/env/
+server/*.log
+
+# Services
+services/**/__pycache__/
+services/**/**/*.pyc
+services/**/**/*.pyo
+services/**/**/*.pyd
+services/**/.pytest_cache/
+services/**/.coverage
+services/**/htmlcov/
+services/**/.mypy_cache/
+
+# Configuration files that should not be committed
+config.json
+configuration.yaml
+
+# Secrets and sensitive data
+secrets/
+secret/
+*.key
+*.pem
+*.crt
+*.cert
+*.p12
+*.pfx
+*.jks
+*.keystore
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# IDE specific
+.vs/
+*.userprefs
+nbproject/
+
+# Python virtual environments in subdirectories
+**/venv/**
+**/.venv/**
+**/env/**
+
+# Docker compose overrides
+docker-compose.override.yml
+docker-compose.prod.yml
+docker-compose.dev.yml
+
+# Platform-specific files
+*.dll
+*.dylib
+*.so
+
+# Qt translation files (if they are generated)
+client-qt/translations/*.qm
+
+# Additional Python files
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+ENV/
+
+# Coverage and testing
+.coverage*
+coverage.xml
+htmlcov/
+.pytest_cache/
+.hypothesis/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pre-commit
+.pre-commit-hooks.yaml
+
+# Pyre
+.pyre/
+
+# Local configuration files
+local_settings.py
+settings_local.py
+
+# Environment-specific files
+.env.production
+.env.staging
+.env.development
+.env.test
+
+# Logs
+logs/
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Qt-specific
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+*.moc.cpp
+*.qm
+*.prl
+
+# Additional ignores for messenger project
+**/node_modules
+**/.npm
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.yarn-integrity
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+**/.idea/
+**/.vscode/
+**/coverage/
+**/dist/
+**/build/
+**/node_modules/
+**/.next/
+**/.nuxt/
+**/out/
+**/.cache/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.tox/
+**/.nox/
+**/.hypothesis/
+**/htmlcov/
+**/pip-log.txt
+**/pip-delete-this-directory.txt
+**/celerybeat-schedule
+**/celerybeat.pid
+**/.coverage
+**/coverage.xml
+**/*.cover
+**/*.py,cover
+**/.DS_Store
+**/Thumbs.db
+**/.dockerenv
+**/.python-version
+**/.env
+**/.venv
+**/env/
+**/venv/
+**/ENV/
+**/env.bak/
+**/venv.bak/
+**/instance/
+**/.webassets-cache
+**/.spyderproject
+**/.spyproject
+**/.ropeproject
+**/.mypy_cache/
+**/.dmypy.json
+**/dmypy.json
+**/.pyre/
+**/public/build/
+**/public/system
+**/public/uploads
+**/storage/*
+**/log/*
+**/tmp/*
+**/vendor/bundle/
+**/.bundle/
+**/.rbx/
+**/public/assets
+**/public/system
+**/public/uploads
+**/config.json
+**/configuration.yaml
+**/secrets/
+**/secret/
+**/*.key
+**/*.pem
+**/*.crt
+**/*.cert
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+**/*.tmp
+**/*.temp
+**/tmp/
+**/temp/
+**/*.bak
+**/*.backup
+**/*.old
+**/*.orig
+**/nbproject/
+**/local_settings.py
+**/settings_local.py
+**/logs/
+**/docker-compose.override.yml
+**/docker-compose.prod.yml
+**/docker-compose.dev.yml
